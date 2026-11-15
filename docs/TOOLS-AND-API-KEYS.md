@@ -51,6 +51,14 @@ For local transcription, ask the assistant to configure
 Python and model dependencies; whisper.cpp has its own installation. Neither is
 installed by `npm ci`.
 
+This fork includes a ready local option: `npm run transcribe:local -- <media> [out.json]`
+runs [faster-whisper](https://github.com/SYSTRAN/faster-whisper) on the CPU and
+writes the cutting tools' word-level format, with no key and no upload. It expects
+a Python virtualenv at `/opt/whisper-venv` with `faster-whisper==1.2.1` and `av<16`
+(set `WHISPER_VENV` to use another) and caches models in `/opt/whisper-models`
+(`HF_HOME`). The default model is `small.en`; pass `--model small --language <code>`
+for other languages.
+
 The cutting tools require this common format, with **word-level times in seconds**
 on the exact source recording's timeline:
 
